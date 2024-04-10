@@ -3,6 +3,13 @@ const Admin = require('../models/adminModel.js');
 const {generateToken} = require('../utils/jwt.js');
 const { sendEmail }= require('../utils/email.js');
 
+function  errorhandle (code , err ,res ){
+    console.log(err);
+    res.status(code).json({
+         status:"fail",
+         error:"Intarnal server error"
+    })
+}
 
 //superAdmin signup
 exports.superAdminsignup = async(req,res)=>{
@@ -24,13 +31,7 @@ exports.superAdminsignup = async(req,res)=>{
     response
         });
       
-    }catch(err){
-      console.log(err);
-      res.status(500).json({
-           status:"fail",
-           error:"Intarnal server error"
-      })
-    }
+    }catch(err){errorhandle(500,err,res)};
 };
 
 // SUPERDMIN LOGIN ROUTE
@@ -57,13 +58,7 @@ exports.superAdminlogin =async(req,res)=>{
            token:token
       })
 
-    }catch(err){
-        console.log(err);
-       res.status(500).json({
-        status:"fail",
-        error:"Internal server error"
-       })
-    }
+    }catch(err){errorhandle(500,err,res)}
 };
 
 // CREATE ADMIN 
@@ -88,14 +83,9 @@ exports.createAdmin= async(req,res)=>{
    response
        });
      
-   }catch(err){
-     console.log(err);
-     res.status(500).json({
-          status:"fail",
-          error:"Intarnal server error"
-     })
-   }
+   }catch(err){errorhandle(500,err,res)}
 };
+// get all admin 
 exports.getAllAdmin =async (req,res)=>{
     const data = await SuperAd.findById(req.user.id);
     if(!data){
@@ -115,13 +105,7 @@ exports.getAllAdmin =async (req,res)=>{
            adminData
          }
        })
-    }catch(err){
-       console.log(err);
-       res.status(500).json({
-            status:"fail",
-            error:"Intarnal server error"
-       })
-    }
+    }catch(err){errorhandle(500,err,res)}
 };
 
 // get single data of admin
@@ -146,13 +130,7 @@ exports.getAdmin =async(req,res)=>{
           status:"success",
           adminData
        })
-    }catch(err){
-       console.log(err);
-       res.status(500).json({
-            status:"fail",
-            error:"Intarnal server error"
-       })
-    }   
+    }catch(err){errorhandle(500,err,res)}   
 };
  
 // admin  update route
@@ -177,12 +155,7 @@ exports.adminUpdate = async(req,res)=>{
         status:"success",
         data:response
     })
-    }catch(err){
-       console.log(err);
-      res.status(500).json({
-      error:"internal server Error"
-   })
-    }
+    }catch(err){errorhandle(500,err,res)}
 };
  
  // delete admin data 
@@ -209,12 +182,7 @@ exports.deleteAdmin =async(req,res)=>{
        res.status(200).json({
         status:"success",
     })
-    }catch(err){
-       console.log(err);
-       res.status(500).json({
-          error:"internal server Error"
-         })
-    }
+    }catch(err){errorhandle(500,err,res) }
  };
  
  
