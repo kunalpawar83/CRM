@@ -1,6 +1,7 @@
 const SuperAd = require('../models/superAdmin.js');
-const Admin =  require('../models/adminModel.js');
+const Admin = require('../models/adminModel.js');
 const {generateToken} = require('../utils/jwt.js');
+const { sendEmail }= require('../utils/email.js');
 
 
 //superAdmin signup
@@ -75,12 +76,13 @@ exports.createAdmin= async(req,res)=>{
         })
     }
    try{
-    //const dataFile =  req.file.path;
+    const dataFile =  req.file.path;
+    req.body.image = dataFile;
     let data = req.body;
-    //data.photo = dataFile;
    const newAdmin= new Admin(data);
    const response = await newAdmin.save();
-
+    
+   sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
    res.status(201).json({
    status:"success",
    response
