@@ -71,13 +71,13 @@ exports.createAdmin= async(req,res)=>{
         })
     }
    try{
-    const dataFile =  req.file.path;
-    req.body.image = dataFile;
+    //const dataFile =  req.file.path;
+    //req.body.image = dataFile;
     let data = req.body;
    const newAdmin= new Admin(data);
    const response = await newAdmin.save();
-    
-   sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
+     
+   //sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
    res.status(201).json({
    status:"success",
    response

@@ -3,7 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 
-const adminSc =  new mongoose.Schema({
+const employeeSc =  new mongoose.Schema({
    firstName:{
       type:String,
       required:true
@@ -52,14 +52,17 @@ const adminSc =  new mongoose.Schema({
       type:String,
       required:true
     },
-    // image:{
-    //   type:String,
-    //   //required:true
-    // }
+    education:{
+      type:String
+    },
+    image:{
+      type:String,
+      required:true
+    }
 
 });
 
-adminSc.pre('save', async function(next) {
+employeeSc.pre('save', async function(next) {
     const user = this;
     if(!user.isModified('password')){
       return next();
@@ -78,7 +81,7 @@ adminSc.pre('save', async function(next) {
   
  });
  
- adminSc.methods.comparePassword = async function(candidatePassword){
+ employeeSc.methods.comparePassword = async function(candidatePassword){
     try{
        const isMatch = await bcrypt.compare(candidatePassword,this.password);
        return isMatch;
@@ -89,5 +92,5 @@ adminSc.pre('save', async function(next) {
  
 
 
-const Admin = mongoose.model('Admin',adminSc);
-module.exports = Admin;
+const Employee = mongoose.model('Employee',employeeSc);
+module.exports = Employee;

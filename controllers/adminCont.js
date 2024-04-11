@@ -1,6 +1,7 @@
 const Admin = require('../models/adminModel.js');
 const { generateToken } = require('../utils/jwt.js');
-const Emp = require('../models/adminModel.js');
+const Emp = require('../models/employeeModel.js');
+const Client = require('../models/clientModel.js');
 
 function  errorhandle (code , err ,res ){
     console.log(err);
@@ -10,7 +11,7 @@ function  errorhandle (code , err ,res ){
     })
 }
 
-
+// admin login
 exports.adminLogin = async(req,res)=>{
     try{
         const {email, password} = req.body;
@@ -37,7 +38,7 @@ exports.adminLogin = async(req,res)=>{
       }catch(err){errorhandle(500,err,res)}     
 }
 
-// CREATE ADMIN 
+// CREATE employee
 exports.createEMP= async(req,res)=>{
   const data = await Admin.findById(req.user.id);
   if(!data){
@@ -47,22 +48,22 @@ exports.createEMP= async(req,res)=>{
       })
   }
  try{
-            const dataFile =  req.file.path;
-            req.body.image = dataFile;
-            let data = req.body;
-            const newAdmin= new Emp(data);
-          const response = await newAdmin.save();
+    const dataFile =  req.file.path;
+    req.body.image = dataFile;
+    let data = req.body;
+    const newEmployee= new Emp(data);
+    const response = await newEmployee.save();
   
-        sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
-          res.status(201).json({
+    //sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
+      res.status(201).json({
         status:"success",
         response
-          });
+      });
    
  }catch(err){errorhandle(500,err,res)}
 };
 
-// get all admin 
+// get all employee
 exports.getAllEMP =async (req,res)=>{
   const data = await Admin.findById(req.user.id);
   if(!data){
@@ -73,19 +74,19 @@ exports.getAllEMP =async (req,res)=>{
   }
   
   try{
-     const adminData = await Emp.find();
+     const employeeData= await Emp.find();
      
      res.status(200).json({
        status:"success",
-       result:adminData.length,
+       result:employeeData.length,
        data:{
-         adminData
+         employeeData
        }
      })
   }catch(err){errorhandle(500,err,res)}
 };
 
-// get single data of admin
+// get single data of employee
 exports.getEMP =async(req,res)=>{
   const data = await Admin.findById(req.user.id);
   if(!data){
@@ -95,35 +96,35 @@ exports.getEMP =async(req,res)=>{
       })
   }
   try{
-     const adminData = await Emp.findById(req.params.id);
+     const employeeData = await Emp.findById(req.params.id);
      if(!adminData){
          return res.status(404).json({
            status:"fail",
-           error:"please provide valid  ID !"
+           error:"employee not found"
         })
      }
 
      res.status(200).json({
         status:"success",
-        adminData
+        employeeData
      })
   }catch(err){errorhandle(500,err,res)}   
 };
 
-// EMP  update route
-exports.adminUpdate = async(req,res)=>{
+// employee  update route
+exports.empUpdate = async(req,res)=>{
   try{
-     const adminId  = req.params.id;
-     const adminData = req.body;
+     const employeeId  = req.params.id;
+     const employeeData = req.body;
      
-     const response = await Emp.findByIdAndUpdate(adminId,adminData,{
+     const response = await Emp.findByIdAndUpdate(employeeId,employeeData,{
        new:true,
        runValidators:true
      })
      if(!response){
       return res.status(404).json({
           status:"fail",
-          error:"User not found"
+          error:"employee not found"
       })
      }
 
@@ -135,8 +136,8 @@ exports.adminUpdate = async(req,res)=>{
   }catch(err){errorhandle(500,err,res)}
 };
 
-// delete EMP data 
-exports.deleteAdmin =async(req,res)=>{
+// delete employee data 
+exports.deleteEmp =async(req,res)=>{
   const data = await Admin.findById(req.user.id);
   if(!data){
       return res.status(400).json({
@@ -145,13 +146,13 @@ exports.deleteAdmin =async(req,res)=>{
       })
   }
   try{
-     const adminId  = req.params.id;
+     const employeeId  = req.params.id;
      
-     const response = await Emp.findByIdAndDelete(adminId)
+     const response = await Emp.findByIdAndDelete(employeeId)
      if(!response){
       return res.status(404).json({
           status:"fail",
-          error:"Admin not found"
+          error:"employee not found"
       })
      }
 
@@ -163,3 +164,126 @@ exports.deleteAdmin =async(req,res)=>{
 };
 
 
+// create client
+exports.createClient= async(req,res)=>{
+  const data = await Admin.findById(req.user.id);
+  if(!data){
+      return res.status(400).json({
+         status:"fail",
+         error:"you do not perform this operation"
+      })
+  }
+ try{
+    //const dataFile =  req.file.path;
+    //req.body.image = dataFile;
+    let data = req.body;
+    const newClient= new Client(data);
+    const response = await newClient.save();
+  
+    //sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
+      res.status(201).json({
+        status:"success",
+        response
+      });
+   
+ }catch(err){errorhandle(500,err,res)}
+};
+
+// get all client
+exports.getAllClient =async (req,res)=>{
+  const data = await Admin.findById(req.user.id);
+  if(!data){
+      return res.status(400).json({
+         status:"fail",
+         error:"you do not perform this operation"
+      })
+  }
+  
+  try{
+     const clientData= await Client.find();
+     
+     res.status(200).json({
+       status:"success",
+       result:clientData.length,
+       data:{
+         clientData
+       }
+     })
+  }catch(err){errorhandle(500,err,res)}
+};
+
+// get single data of client
+exports.getClient =async(req,res)=>{
+  const data = await Admin.findById(req.user.id);
+  if(!data){
+      return res.status(400).json({
+         status:"fail",
+         error:"you do not perform this operation"
+      })
+  }
+  try{
+     const clientData = await Emp.findById(req.params.id);
+     if(!adminData){
+         return res.status(404).json({
+           status:"fail",
+           error:"client not found"
+        })
+     }
+
+     res.status(200).json({
+        status:"success",
+        clientData
+     })
+  }catch(err){errorhandle(500,err,res)}   
+};
+
+// client  update route
+exports.clientUpdate = async(req,res)=>{
+  try{
+     const clientId = req.params.id;
+     const clientData = req.body;
+     
+     const response = await Emp.findByIdAndUpdate(clientId,clientData,{
+       new:true,
+       runValidators:true
+     })
+     if(!response){
+      return res.status(404).json({
+          status:"fail",
+          error:"client not found"
+      })
+     }
+
+     console.log('data updated');
+     res.status(200).json({
+      status:"success",
+      data:response
+  })
+  }catch(err){errorhandle(500,err,res)}
+};
+
+// client data data 
+exports.deleteCLient =async(req,res)=>{
+  const data = await Admin.findById(req.user.id);
+  if(!data){
+      return res.status(400).json({
+         status:"fail",
+         error:"you do not perform this operation"
+      })
+  }
+  try{
+     const clientId  = req.params.id;
+     
+     const response = await Emp.findByIdAndDelete(clientId)
+     if(!response){
+      return res.status(404).json({
+          status:"fail",
+          error:"client not found"
+      })
+     }
+
+     res.status(200).json({
+      status:"success",
+  })
+  }catch(err){errorhandle(500,err,res) }
+};

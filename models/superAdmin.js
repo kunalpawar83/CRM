@@ -54,8 +54,6 @@ superAdminSc.pre('save', async function(next) {
 
 superAdminSc.methods.comparePassword = async function(candidatePassword){
    try{
-      console.log(candidatePassword);
-      console.log(this.password);
       const isMatch = await bcrypt.compare(candidatePassword,this.password);
       return isMatch;
    }catch(err){

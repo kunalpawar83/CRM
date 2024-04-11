@@ -34,7 +34,7 @@ router.post('/signup',superAdmincont.superAdminsignup);
 // superAdmin login
 router.post('/login',superAdmincont.superAdminlogin);
 // create admin 
-router.post('/createAdmin',upload.single('image'),jwtAuthMiddleware,superAdmincont.createAdmin);
+router.post('/createAdmin',jwtAuthMiddleware,superAdmincont.createAdmin);
 //  get all admin
 router.get('/getadmin',jwtAuthMiddleware,superAdmincont.getAllAdmin);
 // get single data of admin
