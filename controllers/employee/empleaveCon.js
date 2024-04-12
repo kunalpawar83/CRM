@@ -1,6 +1,6 @@
-const Empleave =  require('../models/employee/leavesModel.js');
-const Employee = require('../models/employee/employeeModel.js');
-const { generateToken } = require('../utils/jwt.js');
+const Empleave =  require('../../models/employee/leavesModel.js');
+const Employee = require('../../models/employee/employeeModel.js');
+const { generateToken } = require('../../utils/jwt.js');
 
 function  errorhandle (code , err ,res ){
     console.log(err);

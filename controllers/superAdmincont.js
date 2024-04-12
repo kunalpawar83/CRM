@@ -1,7 +1,8 @@
 const SuperAd = require('../models/superAdmin.js');
 const Admin = require('../models/adminModel.js');
 const {generateToken} = require('../utils/jwt.js');
-const { sendEmail }= require('../utils/email.js');
+//const { sendEmail }= require('../utils/email.js');
+const sendEmail= require('../utils/nodemailer.js');
 
 function  errorhandle (code , err ,res ){
     console.log(err);
@@ -76,8 +77,12 @@ exports.createAdmin= async(req,res)=>{
     let data = req.body;
    const newAdmin= new Admin(data);
    const response = await newAdmin.save();
-     
-   sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
+   await sendEmail({
+        email:data.email,
+        subject:"wellcome to our website",
+        message:"thank you  to join us for your success"
+
+    })
    res.status(201).json({
    status:"success",
    response
