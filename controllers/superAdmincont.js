@@ -77,7 +77,7 @@ exports.createAdmin= async(req,res)=>{
    const newAdmin= new Admin(data);
    const response = await newAdmin.save();
      
-   //sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
+   sendEmail(newAdmin.email,'Welcome to our website', 'Thank you for registering with us!');
    res.status(201).json({
    status:"success",
    response

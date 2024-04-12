@@ -30,6 +30,8 @@ const upload =  multer({
 
 // admin login
 router.post('/login',admincont.adminLogin);
+
+
 // create employee 
 router.post('/createemp',upload.single('image'),jwtAuthMiddleware,admincont.createEMP);
 // get all employee
@@ -40,15 +42,17 @@ router.get('/getemp/:id',jwtAuthMiddleware,admincont.getEMP);
 router.put('/updateemp/:id',jwtAuthMiddleware,admincont.empUpdate);
 // delete employee
 router.delete('/deleteemp/:id',jwtAuthMiddleware,admincont.deleteEmp);
+
+
 // create client 
 router.post('/createClient',jwtAuthMiddleware,admincont.createClient);
 // get all client
 router.get('/getallclient',jwtAuthMiddleware,admincont.getAllClient);
 // get client
-router.get('/getclient',jwtAuthMiddleware,admincont.getClient);
+router.get('/getclient/:id',jwtAuthMiddleware,admincont.getClient);
 // update client
-router.put('/updateclient',jwtAuthMiddleware,admincont.clientUpdate);
+router.put('/updateclient/:id',jwtAuthMiddleware,admincont.clientUpdate);
 // delete client
-router.delete('/deleteclient',jwtAuthMiddleware,admincont.deleteCLient);
+router.delete('/deleteclient/:id',jwtAuthMiddleware,admincont.deleteCLient);
 
 module.exports = router;

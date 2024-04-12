@@ -24,8 +24,7 @@ const clientSc =  new mongoose.Schema({
         required:true,
       },
       currency:{
-        type:Number,
-        required:true
+        type:Number
       },
       billing:{
         type:String,

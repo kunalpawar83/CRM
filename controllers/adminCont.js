@@ -1,6 +1,6 @@
 const Admin = require('../models/adminModel.js');
 const { generateToken } = require('../utils/jwt.js');
-const Emp = require('../models/employeeModel.js');
+const Emp = require('../models/employee/employeeModel.js');
 const Client = require('../models/clientModel.js');
 
 function  errorhandle (code , err ,res ){
@@ -97,7 +97,7 @@ exports.getEMP =async(req,res)=>{
   }
   try{
      const employeeData = await Emp.findById(req.params.id);
-     if(!adminData){
+     if(!employeeData){
          return res.status(404).json({
            status:"fail",
            error:"employee not found"
@@ -222,8 +222,8 @@ exports.getClient =async(req,res)=>{
       })
   }
   try{
-     const clientData = await Emp.findById(req.params.id);
-     if(!adminData){
+     const clientData = await Client.findById(req.params.id);
+     if(!clientData){
          return res.status(404).json({
            status:"fail",
            error:"client not found"
@@ -243,7 +243,7 @@ exports.clientUpdate = async(req,res)=>{
      const clientId = req.params.id;
      const clientData = req.body;
      
-     const response = await Emp.findByIdAndUpdate(clientId,clientData,{
+     const response = await Client.findByIdAndUpdate(clientId,clientData,{
        new:true,
        runValidators:true
      })
@@ -274,7 +274,7 @@ exports.deleteCLient =async(req,res)=>{
   try{
      const clientId  = req.params.id;
      
-     const response = await Emp.findByIdAndDelete(clientId)
+     const response = await Client.findByIdAndDelete(clientId)
      if(!response){
       return res.status(404).json({
           status:"fail",
