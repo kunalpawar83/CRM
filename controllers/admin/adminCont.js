@@ -1,7 +1,7 @@
-const Admin = require('../models/adminModel.js');
-const { generateToken } = require('../utils/jwt.js');
-const Emp = require('../models/employee/employeeModel.js');
-const Client = require('../models/client/clientModel.js');
+const Admin = require('../../models/admin/adminModel.js');
+const { generateToken } = require('../../utils/jwt.js');
+const Emp = require('../../models/employee/employeeModel.js');
+const Client = require('../../models/client/clientModel.js');
 
 function  errorhandle (code , err ,res ){
     console.log(err);

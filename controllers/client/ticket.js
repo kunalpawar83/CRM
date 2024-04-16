@@ -1,6 +1,14 @@
 const Client  = require('../../models/client/clientModel.js');
 const Ticket  = require('../../models/client/ticketModel.js');
 
+function errorhandle( code , err , res){
+  console.log(err),
+  res.status(code).json({
+     status:"fail",
+     error:'Internal server error'
+  })
+};
+
 // create client ticket
 exports.createTicket= async(req,res)=>{
     const data = await Client.findById(req.user.id);
@@ -114,7 +122,7 @@ exports.deleteTicket =async(req,res)=>{
        if(!response){
         return res.status(404).json({
             status:"fail",
-            error:" project not found"
+            error:" ticket not found"
         })
        }
        res.status(200).json({

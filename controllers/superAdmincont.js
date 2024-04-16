@@ -1,5 +1,5 @@
 const SuperAd = require('../models/superAdmin.js');
-const Admin = require('../models/adminModel.js');
+const Admin = require('../models/admin/adminModel.js');
 const {generateToken} = require('../utils/jwt.js');
 //const { sendEmail }= require('../utils/email.js');
 const sendEmail= require('../utils/nodemailer.js');

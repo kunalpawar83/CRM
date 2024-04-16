@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
-const admincont  = require('../controllers/adminCont.js');
+const admincont  = require('../controllers/admin/adminCont.js');
+const adminProjectCont  = require('../controllers/admin/projectCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -31,7 +32,7 @@ const upload =  multer({
 // admin login
 router.post('/login',admincont.adminLogin);
 
-
+// all route of employee
 // create employee 
 router.post('/createemp',upload.single('image'),jwtAuthMiddleware,admincont.createEMP);
 // get all employee
@@ -43,6 +44,7 @@ router.put('/updateemp/:id',jwtAuthMiddleware,admincont.empUpdate);
 // delete employee
 router.delete('/deleteemp/:id',jwtAuthMiddleware,admincont.deleteEmp);
 
+// all route of client
 
 // create client 
 router.post('/createClient',jwtAuthMiddleware,admincont.createClient);
@@ -54,5 +56,17 @@ router.get('/getclient/:id',jwtAuthMiddleware,admincont.getClient);
 router.put('/updateclient/:id',jwtAuthMiddleware,admincont.clientUpdate);
 // delete client
 router.delete('/deleteclient/:id',jwtAuthMiddleware,admincont.deleteCLient);
+
+// all route of admin project
+// create admin project
+router.post('/createproject',jwtAuthMiddleware,adminProjectCont.createProject);
+// get all admin project
+router.get('/getallproject',jwtAuthMiddleware,adminProjectCont.getAllProject);
+// get project
+router.get('/getproject/:id',jwtAuthMiddleware,adminProjectCont.getProject);
+// update project
+router.put('/updateproject/:id',jwtAuthMiddleware,adminProjectCont.updateProject);
+// delete projecct 
+router.delete('/deleteproject/:id',jwtAuthMiddleware,adminProjectCont.deleteProject);
 
 module.exports = router;
