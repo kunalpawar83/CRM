@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const admincont  = require('../controllers/admin/adminCont.js');
 const adminProjectCont  = require('../controllers/admin/projectCont.js');
+const Estimate = require('../controllers/admin/estimateCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -68,5 +69,17 @@ router.get('/getproject/:id',jwtAuthMiddleware,adminProjectCont.getProject);
 router.put('/updateproject/:id',jwtAuthMiddleware,adminProjectCont.updateProject);
 // delete projecct 
 router.delete('/deleteproject/:id',jwtAuthMiddleware,adminProjectCont.deleteProject);
+
+// all route estimate 
+// create estimate
+router.post('/createestimate',jwtAuthMiddleware,Estimate.createEstimate);
+// get all estimate
+router.get('/getallestimate',jwtAuthMiddleware,Estimate.getAllEstimate);
+// get estimate
+router.get('/getestimate/:id',jwtAuthMiddleware,Estimate.getEstimate);
+// update estimate
+router.put('/updateestimate/:id',jwtAuthMiddleware,Estimate.estimateUpdate);
+// delete estimate
+router.delete('/deleteestimate/:id',jwtAuthMiddleware,Estimate.deleteEStimate);
 
 module.exports = router;
