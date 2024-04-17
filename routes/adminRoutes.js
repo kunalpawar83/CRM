@@ -3,6 +3,7 @@ const router  = express.Router();
 const admincont  = require('../controllers/admin/adminCont.js');
 const adminProjectCont  = require('../controllers/admin/projectCont.js');
 const Estimate = require('../controllers/admin/estimateCont.js');
+const Leave = require('../controllers/admin/leaveCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -81,5 +82,16 @@ router.get('/getestimate/:id',jwtAuthMiddleware,Estimate.getEstimate);
 router.put('/updateestimate/:id',jwtAuthMiddleware,Estimate.estimateUpdate);
 // delete estimate
 router.delete('/deleteestimate/:id',jwtAuthMiddleware,Estimate.deleteEStimate);
+
+// all route of leave
+// get all leave
+router.get('/getallleave',jwtAuthMiddleware,Leave.getALlLeave);
+// get leave
+router.get('/getleave/:id',jwtAuthMiddleware,Leave.getLeave);
+// update leave
+router.put('/updateleave/:id',jwtAuthMiddleware,Leave.updateLeave);
+// delete leave
+router.delete('/deleteleave/:id',jwtAuthMiddleware,Leave.deleteLeave);
+
 
 module.exports = router;
