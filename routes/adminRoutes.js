@@ -6,6 +6,7 @@ const Estimate = require('../controllers/admin/estimateCont.js');
 const Leave = require('../controllers/admin/leaveCont.js');
 const Holiday = require('../controllers/admin/holidayCont.js');
 const Payment = require('../controllers/admin/paymentCont.js');
+const Employeesalary = require('../controllers/admin/employeeSalaryCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -118,4 +119,17 @@ router.get('/getpayment/:id',jwtAuthMiddleware,Payment.getPayment);
 router.put('/updatepayment/:id',jwtAuthMiddleware,Payment.updatePayment);
 // delete payment
 router.delete('/deletepayment/:id',jwtAuthMiddleware,Payment.deletePayment);
+
+// all route of employeesalary
+// create eamployeesalary
+router.post('/createsalary',jwtAuthMiddleware,Employeesalary.createSalary);
+// get all salary
+router.get('/getallsalary',jwtAuthMiddleware,Employeesalary.getAllSalary);
+// get salary
+router.get('/getsalary/:id',jwtAuthMiddleware,Employeesalary.getSalary);
+// update salary
+router.put('/updatesalary/:id',jwtAuthMiddleware,Employeesalary.updateSalary);
+// delete salary
+router.delete('/deletesalary/:id',jwtAuthMiddleware,Employeesalary.deleteSalary);
+
 module.exports = router;
