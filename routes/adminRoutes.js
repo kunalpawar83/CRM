@@ -5,6 +5,7 @@ const adminProjectCont  = require('../controllers/admin/projectCont.js');
 const Estimate = require('../controllers/admin/estimateCont.js');
 const Leave = require('../controllers/admin/leaveCont.js');
 const Holiday = require('../controllers/admin/holidayCont.js');
+const Payment = require('../controllers/admin/paymentCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -105,4 +106,16 @@ router.get('/getholiday/:id',jwtAuthMiddleware,Holiday.getHoliday);
 router.put('/updateholiday/:id',jwtAuthMiddleware,Holiday.updateHoliday);
 // delete holiday
 router.delete('/deleteholiday/:id',jwtAuthMiddleware,Holiday.deleteHoliday);
+
+// all route of payment
+// create payment
+router.post('/createpayment',jwtAuthMiddleware,Payment.createPayment);
+// get all payment
+router.get('/getallpayment',jwtAuthMiddleware,Payment.getAllPaument);
+// get payment
+router.get('/getpayment/:id',jwtAuthMiddleware,Payment.getPayment);
+// update payment
+router.put('/updatepayment/:id',jwtAuthMiddleware,Payment.updatePayment);
+// delete payment
+router.delete('/deletepayment/:id',jwtAuthMiddleware,Payment.deletePayment);
 module.exports = router;
