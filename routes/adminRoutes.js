@@ -4,6 +4,7 @@ const admincont  = require('../controllers/admin/adminCont.js');
 const adminProjectCont  = require('../controllers/admin/projectCont.js');
 const Estimate = require('../controllers/admin/estimateCont.js');
 const Leave = require('../controllers/admin/leaveCont.js');
+const Holiday = require('../controllers/admin/holidayCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -93,5 +94,15 @@ router.put('/updateleave/:id',jwtAuthMiddleware,Leave.updateLeave);
 // delete leave
 router.delete('/deleteleave/:id',jwtAuthMiddleware,Leave.deleteLeave);
 
-
+// all route oh holiday
+// create holiday
+router.post('/createholiday',jwtAuthMiddleware,Holiday.createHoliday)
+// get all holiday
+router.get('/getallholiday',jwtAuthMiddleware,Holiday.getAllHoliday);
+// get holiday
+router.get('/getholiday/:id',jwtAuthMiddleware,Holiday.getHoliday);
+// update holiday
+router.put('/updateholiday/:id',jwtAuthMiddleware,Holiday.updateHoliday);
+// delete holiday
+router.delete('/deleteholiday/:id',jwtAuthMiddleware,Holiday.deleteHoliday);
 module.exports = router;
