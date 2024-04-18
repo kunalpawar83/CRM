@@ -7,6 +7,7 @@ const Leave = require('../controllers/admin/leaveCont.js');
 const Holiday = require('../controllers/admin/holidayCont.js');
 const Payment = require('../controllers/admin/paymentCont.js');
 const Employeesalary = require('../controllers/admin/employeeSalaryCont.js');
+const Leader  = require('../controllers/admin/leaderCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -131,5 +132,17 @@ router.get('/getsalary/:id',jwtAuthMiddleware,Employeesalary.getSalary);
 router.put('/updatesalary/:id',jwtAuthMiddleware,Employeesalary.updateSalary);
 // delete salary
 router.delete('/deletesalary/:id',jwtAuthMiddleware,Employeesalary.deleteSalary);
+
+// all route of leader
+// create leader
+router.post('/createleader',jwtAuthMiddleware,Leader.createLearder);
+// get all leader
+router.get('/getallleader',jwtAuthMiddleware,Leader.getAllLeader);
+// get leader
+router.get('/getleader/:id',jwtAuthMiddleware,Leader.getLeader);
+// update leader
+router.put('/updateleader/:id',jwtAuthMiddleware,Leader.updateLeader);
+// delete leader 
+router.delete('/deleteleader/:id',jwtAuthMiddleware,Leader.deleteLeader);
 
 module.exports = router;
