@@ -9,6 +9,7 @@ const Payment = require('../controllers/admin/paymentCont.js');
 const Employeesalary = require('../controllers/admin/employeeSalaryCont.js');
 const Leader  = require('../controllers/admin/leaderCont.js');
 const Job  = require('../controllers/admin/jobCont.js');
+const Resume = require('../controllers/admin/resumeCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -157,4 +158,16 @@ router.get('/getjob/:id',jwtAuthMiddleware,Job.getJob);
 router.put('/updatejob/:id',jwtAuthMiddleware,Job.updateJob);
 // delete job
 router.delete('/deletejob/:id',jwtAuthMiddleware,Job.deleteJob);
+
+// all route of resume
+// create resume
+router.post('/createresume',jwtAuthMiddleware,Resume.createResume);
+// get all resume
+router.get('/getallresume',jwtAuthMiddleware,Resume.getAllResume);
+// get resume
+router.get('/getresume/:id',jwtAuthMiddleware,Resume.getResume);
+// update resume
+router.put('/updateresume/:id',jwtAuthMiddleware,Resume.updateResume);
+// delete resume
+router.delete('/deleteresume/:id',jwtAuthMiddleware,Resume.deleteResume);
 module.exports = router;
