@@ -8,6 +8,7 @@ const Holiday = require('../controllers/admin/holidayCont.js');
 const Payment = require('../controllers/admin/paymentCont.js');
 const Employeesalary = require('../controllers/admin/employeeSalaryCont.js');
 const Leader  = require('../controllers/admin/leaderCont.js');
+const Job  = require('../controllers/admin/jobCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -145,4 +146,15 @@ router.put('/updateleader/:id',jwtAuthMiddleware,Leader.updateLeader);
 // delete leader 
 router.delete('/deleteleader/:id',jwtAuthMiddleware,Leader.deleteLeader);
 
+// all route of job
+// create job
+router.post('/createjob',jwtAuthMiddleware,Job.createJob);
+// get all job
+router.get('/getalljob',jwtAuthMiddleware,Job.getAllJob);
+// get job
+router.get('/getjob/:id',jwtAuthMiddleware,Job.getJob);
+// update job
+router.put('/updatejob/:id',jwtAuthMiddleware,Job.updateJob);
+// delete job
+router.delete('/deletejob/:id',jwtAuthMiddleware,Job.deleteJob);
 module.exports = router;
