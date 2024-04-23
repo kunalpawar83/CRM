@@ -11,6 +11,7 @@ const Leader  = require('../controllers/admin/leaderCont.js');
 const Job  = require('../controllers/admin/jobCont.js');
 const Resume = require('../controllers/admin/resumeCont.js');
 const Candidates = require('../controllers/admin/candidateCont.js');
+const Contact = require('../controllers/admin/contactCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
 
 const multer = require('multer');
@@ -183,5 +184,17 @@ router.get('/getcandidate/:id',jwtAuthMiddleware,Candidates.getCandidate);
 router.put('/updatecandidate/:id',jwtAuthMiddleware,Candidates.updateCandidate);
 // delete candidate
 router.delete('/deletecandidate/:id',jwtAuthMiddleware,Candidates.deleteCandidate);
+
+// all route of contact
+// create contact
+router.post('/createcontact',jwtAuthMiddleware,Contact.createContact);
+// get all contact
+router.get('/getallcontact',jwtAuthMiddleware,Contact.getAllContact);
+// get contact
+router.get('/getcontact/:id',jwtAuthMiddleware,Contact.getContact);
+// update contact
+router.put('/updatecontact/:id',jwtAuthMiddleware,Contact.updateContact);
+// delete contact
+router.delete('/deletecontact/:id',jwtAuthMiddleware,Contact.deleteContact);
 
 module.exports = router;
