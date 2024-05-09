@@ -1,0 +1,4 @@
+-here I am working on a Customer relationship management dashboard.
+-Implemented a secure authentication solution, ensuring the protection of sensitive customer data.
+-I have created more than 70 routes including routes for employees, and clients, super admin allows admin to create employees and clients, and many more features.
+-I had added super admin features. super admin has the authority to add admin. super admin can see what is going on in the app.
